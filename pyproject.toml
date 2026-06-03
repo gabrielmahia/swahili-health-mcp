@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name = "swahili-health-mcp"
+version = "0.1.0"
+description = "MCP server for Kenya health data — facilities, maternal health, immunization"
+readme = "README.md"
+license = {text = "MIT"}
+keywords = ["kenya", "health", "mcp", "swahili", "dhis2", "east-africa"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Intended Audience :: Developers",
+    "Topic :: Scientific/Engineering :: Medical Science Apps.",
+]
+requires-python = ">=3.9"
+dependencies = []
+
+[project.scripts]
+swahili-health-mcp = "swahili_health_mcp.server:run_server"
+
+[project.urls]
+Homepage = "https://github.com/gabrielmahia/swahili-health-mcp"
+Repository = "https://github.com/gabrielmahia/swahili-health-mcp"
