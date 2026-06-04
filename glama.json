@@ -1,0 +1,91 @@
+{
+  "$schema": "https://glama.ai/mcp/schemas/1.0.0/server.json",
+  "name": "swahili-health-mcp",
+  "version": "0.1.0",
+  "description": "MCP server for Kenya health data via DHIS2/KHIS public API. Enables AI agents to query Kenya health facilities, maternal health indicators, immunization coverage, and disease surveillance data. Swahili-native tool descriptions for Swahili-language AI agents.",
+  "license": "MIT",
+  "homepage": "https://gabrielmahia.github.io",
+  "author": {
+    "name": "Gabriel Mahia",
+    "email": "contact@aikungfu.dev",
+    "url": "https://gabrielmahia.github.io"
+  },
+  "keywords": [
+    "kenya",
+    "health",
+    "dhis2",
+    "khis",
+    "swahili",
+    "east-africa",
+    "mcp",
+    "model-context-protocol",
+    "facilities",
+    "maternal-health",
+    "immunization",
+    "public-health",
+    "africa"
+  ],
+  "tools": [
+    {
+      "name": "search_health_facilities",
+      "description": "Tafuta vituo vya afya Kenya / Search Kenya health facilities by county and level. Returns facility name, location, level (1-6), and services available.",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "get_maternal_health_indicators",
+      "description": "Pata takwimu za afya ya uzazi / Get maternal health indicators for a Kenya county \u2014 ANC visits, skilled birth attendance, postnatal care rates.",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "get_immunization_coverage",
+      "description": "Pata kiwango cha chanjo / Get child immunization coverage by vaccine (BCG, DPT3, Measles, OPV) and county in Kenya.",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": true
+      }
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gabrielmahia/swahili-health-mcp"
+  },
+  "installation": {
+    "pip": "swahili-health-mcp",
+    "uvx": "swahili-health-mcp"
+  },
+  "relatedServers": [
+    {
+      "name": "mpesa-mcp",
+      "url": "https://github.com/gabrielmahia/mpesa-mcp",
+      "description": "M-PESA Daraja API MCP server by same author"
+    },
+    {
+      "name": "wapimaji-mcp",
+      "url": "https://github.com/gabrielmahia/wapimaji-mcp",
+      "description": "Kenya water infrastructure MCP server"
+    }
+  ],
+  "maintainers": [
+    "gabrielmahia"
+  ],
+  "envVars": [
+    {
+      "name": "GOOGLE_API_KEY",
+      "description": "Google Gemini API key for AI-enhanced responses (optional \u2014 server works without it)",
+      "required": false,
+      "secret": true
+    }
+  ]
+}
