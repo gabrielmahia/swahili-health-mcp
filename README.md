@@ -40,3 +40,7 @@ All data is publicly available via Kenya's open government data policy.
 ## Part of the East Africa Civic Tech Portfolio
 
 See also: [mpesa-mcp](https://github.com/gabrielmahia/mpesa-mcp) | [wapimaji-mcp](https://github.com/gabrielmahia/wapimaji-mcp)
+
+## IP & Collaboration
+
+MIT licensed. Feedback via GitHub Issues only — pull requests are not accepted. Demo data is labeled DEMO and is not suitable for operational decisions. Full policy: [docs/architecture/IP_POLICY.md](docs/architecture/IP_POLICY.md). Security reports: see [SECURITY.md](SECURITY.md).
