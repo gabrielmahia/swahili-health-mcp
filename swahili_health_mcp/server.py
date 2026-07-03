@@ -5,9 +5,6 @@ Wraps Kenya DHIS2 public API as MCP tools for AI agents
 from __future__ import annotations
 import sys
 import json
-import urllib.request
-import urllib.parse
-from typing import Any
 
 # DHIS2 Kenya public endpoint
 DHIS2_BASE = "https://hiskenya.org/api"
@@ -124,7 +121,6 @@ def mcp_call_tool(name: str, arguments: dict) -> dict:
 
 def run_server():
     """Run MCP server over stdio."""
-    import sys
     for line in sys.stdin:
         line = line.strip()
         if not line:
