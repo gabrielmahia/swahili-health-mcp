@@ -1,17 +1,16 @@
 [build-system]
-requires = ["setuptools>=68", "wheel"]
-build-backend = "setuptools.backends.legacy:build"
+requires = ["setuptools>=77", "wheel"]
+build-backend = "setuptools.build_meta"
 
 [project]
 name = "swahili-health-mcp"
 version = "0.1.0"
 description = "MCP server for Kenya health data — facilities, maternal health, immunization"
 readme = "README.md"
-license = {text = "MIT"}
+license = "MIT"
 keywords = ["kenya", "health", "mcp", "swahili", "dhis2", "east-africa"]
 classifiers = [
     "Programming Language :: Python :: 3",
-    "License :: OSI Approved :: MIT License",
     "Intended Audience :: Developers",
     "Topic :: Scientific/Engineering :: Medical Science Apps.",
 ]
