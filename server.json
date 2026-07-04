@@ -1,0 +1,20 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-07-09/server.schema.json",
+  "name": "io.github.gabrielmahia/swahili-health-mcp",
+  "description": "\ud83c\udfe5 Swahili Health MCP",
+  "repository": {
+    "url": "https://github.com/gabrielmahia/swahili-health-mcp",
+    "source": "github"
+  },
+  "version": "0.1.1",
+  "packages": [
+    {
+      "registry_type": "pypi",
+      "identifier": "swahili-health-mcp",
+      "version": "0.1.1",
+      "transport": {
+        "type": "stdio"
+      }
+    }
+  ]
+}

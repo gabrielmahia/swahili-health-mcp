@@ -1,4 +1,5 @@
 # 🏥 Swahili Health MCP
+<!-- mcp-name: io.github.gabrielmahia/swahili-health-mcp -->
 
 Model Context Protocol (MCP) server for Kenya health data. Provides AI agents with tools to query Kenya health facilities, maternal health indicators, immunization coverage, and disease surveillance data via the DHIS2 public API.
 
