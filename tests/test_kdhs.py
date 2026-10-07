@@ -88,3 +88,11 @@ def test_refresh_keeps_preferred_rows_only_and_finds_nairobi_as_a_region_row():
             {"IsPreferred": 1, "CharacteristicLabel": "..Kwale", "Value": "", "DenominatorUnweighted": 1, "ByVariableLabel": "Two years"}]
     out = refresh.county_rows(rows)
     assert out["Mombasa"]["value"] == 65.3 and out["Nairobi"]["value"] == 80.5 and "Coast" not in out and "Kwale" not in out
+
+
+def test_no_answer_has_an_empty_reference_period():
+    """DHS gives no period label for vaccination indicators; the old output returned an empty string, which reads as a bug and says nothing."""
+    r = call("get_immunization_coverage", county="Nairobi", vaccine="DPT3")
+    assert r["indicators"][0]["period"] and "not stated" in r["indicators"][0]["period"]
+    assert all(c["period"] for c in call("compare_counties", indicator="CH_VACC_C_DP3", n=5)["counties"])
+    assert "Two years" in call("get_maternal_health_indicators", county="Nairobi")["indicators"][0]["period"]

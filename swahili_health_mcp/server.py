@@ -49,9 +49,14 @@ def resolve_indicator(name: str) -> str:
     raise ToolError(f"{'Ambiguous' if hits else 'Unknown'} indicator {name!r}. Use one of: " + "; ".join(f"{i} ({m['label']})" for i, m in INDICATORS.items()))
 
 
+def _period(rec: dict) -> str:
+    """DHS labels a reference period for some indicators (maternal care: the two years before the survey) and none for others (vaccination of children 12-23 months): say so instead of returning an empty string."""
+    return rec.get("period") or "not stated by DHS for this indicator (survey fieldwork 2022)"
+
+
 def _row(county: str, iid: str) -> dict:
     r, m = COUNTIES[county][iid], INDICATORS[iid]
-    return {"indicator_id": iid, "label": m["label"], "value_pct": r["value"], "population": m["population"], "n": r["n"], "period": r["period"],
+    return {"indicator_id": iid, "label": m["label"], "value_pct": r["value"], "population": m["population"], "n": r["n"], "period": _period(r),
             "direction": "lower is better" if iid in LOWER_IS_BETTER else "higher is better"}
 
 
@@ -85,7 +90,7 @@ def compare(indicator: str, n: int = 5, order: str = "lowest") -> dict:
     n = max(1, min(int(n), len(COUNTIES)))
     ranked = sorted(((c, COUNTIES[c][iid]) for c in COUNTIES if iid in COUNTIES[c]), key=lambda kv: kv[1]["value"], reverse=(order == "highest"))[:n]
     return {"indicator_id": iid, "label": INDICATORS[iid]["label"], "population": INDICATORS[iid]["population"], "order": order, "direction": "lower is better" if iid in LOWER_IS_BETTER else "higher is better",
-            "counties": [{"county": c, "value_pct": r["value"], "n": r["n"], "period": r["period"]} for c, r in ranked], "survey": "Kenya DHS 2022", "source": DATA["source"], "caveat": CAVEAT}
+            "counties": [{"county": c, "value_pct": r["value"], "n": r["n"], "period": _period(r)} for c, r in ranked], "survey": "Kenya DHS 2022", "source": DATA["source"], "caveat": CAVEAT}
 
 
 READ_ONLY = {"readOnlyHint": True, "idempotentHint": True, "openWorldHint": False}
