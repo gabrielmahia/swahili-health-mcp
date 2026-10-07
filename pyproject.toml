@@ -4,21 +4,21 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "swahili-health-mcp"
-version = "0.1.2"
-description = "MCP server for Kenya health data — facilities, maternal health, immunization"
+version = "0.2.0"
+description = "MCP server for Kenya county health indicators: maternal care, immunization and child stunting from the Kenya DHS 2022"
 readme = "README.md"
 license = "MIT"
-keywords = ["kenya", "health", "mcp", "swahili", "dhis2", "east-africa"]
+keywords = ["kenya", "health", "mcp", "swahili", "dhs", "kdhs", "maternal-health", "immunization", "east-africa"]
 classifiers = [
     "Programming Language :: Python :: 3",
     "Intended Audience :: Developers",
     "Topic :: Scientific/Engineering :: Medical Science Apps.",
 ]
-requires-python = ">=3.9"
-dependencies = []
+requires-python = ">=3.10"
+dependencies = ["fastmcp>=4,<5"]
 
 [project.scripts]
-swahili-health-mcp = "swahili_health_mcp.server:run_server"
+swahili-health-mcp = "swahili_health_mcp.server:main"
 
 [project.urls]
 Homepage = "https://github.com/gabrielmahia/swahili-health-mcp"
@@ -27,3 +27,9 @@ Documentation = "https://github.com/gabrielmahia/nairobi-stack"
 "MCP Registry" = "https://registry.modelcontextprotocol.io"
 Datasets = "https://huggingface.co/gmahia"
 Evaluation = "https://github.com/gabrielmahia/kipimo"
+
+[tool.setuptools.packages.find]
+include = ["swahili_health_mcp*"]
+
+[tool.setuptools.package-data]
+swahili_health_mcp = ["data/*.json"]

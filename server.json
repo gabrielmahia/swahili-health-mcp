@@ -1,17 +1,17 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-10-17/server.schema.json",
   "name": "io.github.gabrielmahia/swahili-health-mcp",
-  "description": "\ud83c\udfe5 Swahili Health MCP",
+  "description": "Kenya county health indicators (maternal care, immunization, stunting) from the Kenya DHS 2022",
   "repository": {
     "url": "https://github.com/gabrielmahia/swahili-health-mcp",
     "source": "github"
   },
-  "version": "0.1.2",
+  "version": "0.2.0",
   "packages": [
     {
       "registryType": "pypi",
       "identifier": "swahili-health-mcp",
-      "version": "0.1.2",
+      "version": "0.2.0",
       "transport": {
         "type": "stdio"
       }

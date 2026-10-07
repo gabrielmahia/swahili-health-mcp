@@ -1,50 +1,48 @@
-# 🏥 Swahili Health MCP
+# Swahili Health MCP
 <!-- mcp-name: io.github.gabrielmahia/swahili-health-mcp -->
 
-Model Context Protocol (MCP) server for Kenya health data. Provides AI agents with tools to query Kenya health facilities, maternal health indicators, immunization coverage, and disease surveillance data via the DHIS2 public API.
+Kenya **county-level** maternal health, child immunization and child stunting indicators for AI agents, from the DHS Program's **Kenya Demographic and Health Survey 2022**.
+Real survey data, bundled in the package (works offline), with the source, survey year, reference period and sample size on every answer.
 
 [![PyPI version](https://badge.fury.io/py/swahili-health-mcp.svg)](https://badge.fury.io/py/swahili-health-mcp)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Tools
 
-| Tool | Description |
-|------|-------------|
-| `get_health_facility` | Get details of a Kenya health facility by name or code |
-| `search_facilities_by_county` | List health facilities in a county with level and services |
-| `get_maternal_health` | Maternal health indicators — ANC visits, skilled birth attendance |
-| `get_immunization_coverage` | Child immunization coverage by vaccine and county |
-| `get_disease_surveillance` | Weekly disease surveillance data (malaria, diarrhea, pneumonia) |
-| `get_health_worker_count` | Health worker density by county |
+| Tool | What it does |
+|------|--------------|
+| `list_health_indicators` | The 11 indicators held (id, label, population, whether higher or lower is better) and the survey they come from. Call this first. |
+| `get_county_health_profile` | Every indicator for one county. |
+| `get_maternal_health_indicators` | Antenatal visits (4+), antenatal care from a skilled provider, skilled assistance at delivery, health-facility delivery, no postnatal checkup. |
+| `get_immunization_coverage` | Children 12-23 months who received BCG, DPT3, measles, were fully vaccinated (8 basic antigens) or received none. |
+| `compare_counties` | Rank the counties on one indicator: where is need greatest, where is coverage best. |
 
-## Usage with Claude
+All 47 counties, Nairobi included. An unknown county or vaccine is an **error that lists the valid values**; nothing is guessed or defaulted.
+
+## Install and use
 
 ```bash
-# Install
 pip install swahili-health-mcp
-
-# Add to Claude Code
-claude mcp add swahili-health -- swahili-health-mcp
-
-# Or with uvx
-claude mcp add swahili-health -- uvx swahili-health-mcp
+claude mcp add swahili-health -- swahili-health-mcp      # or: uvx swahili-health-mcp
 ```
 
-## Data Sources
+Then ask: "Which five counties have the lowest DPT3 coverage?", "Compare antenatal care in Turkana and Nairobi."
 
-- Kenya DHIS2 (dhis.moh.go.ke) — Ministry of Health open data
-- Kenya Health Facility Registry (kenyaemr.org)
-- Kenya Health Information System (KHIS)
+## What these numbers are, and are not
+- **Survey estimates**, not routine facility reporting (KHIS). Each carries sampling error; county samples are small, so close values are not reliably different (the sample size `n` is in every answer).
+- The reference period is the DHS-preferred one (the two years before the survey). DHS also publishes a three-year period for the same counties; this server deliberately uses one.
+- Data: The DHS Program, Kenya DHS 2022 (KNBS and ICF), retrieved from `api.dhsprogram.com` and bundled as `swahili_health_mcp/data/kdhs2022_counties.json`. Rebuild it with `python scripts/refresh_kdhs.py` (needs network; the server does not).
+- Not clinical advice and not an operational record. There is **no facility register, disease surveillance or health-worker data** here: earlier versions advertised some of those and did not deliver them (see below).
 
-All data is publicly available via Kenya's open government data policy.
-
-## Part of the East Africa Civic Tech Portfolio
-
-See also: [mpesa-mcp](https://github.com/gabrielmahia/mpesa-mcp) | [wapimaji-mcp](https://github.com/gabrielmahia/wapimaji-mcp)
+## Changes in 0.2.0 (breaking)
+- Replaced synthetic demo numbers (identical for every county) with real KDHS 2022 county estimates.
+- Removed the demo facility list (unverified details). A real facility register (Kenya Master Health Facility List) is not integrated yet.
+- The README previously listed tools that never existed (`get_disease_surveillance`, `get_health_worker_count`, and others); the tool list above is exactly what the server exposes, and a test enforces it.
+- Moved from a hand-rolled JSON-RPC loop to FastMCP 4, which serves both the legacy and the stateless 2026-07-28 MCP protocol revisions.
 
 ## IP & Collaboration
 
-MIT licensed. Feedback via GitHub Issues only — pull requests are not accepted. Demo data is labeled DEMO and is not suitable for operational decisions. Full policy: [docs/architecture/IP_POLICY.md](docs/architecture/IP_POLICY.md). Security reports: see [SECURITY.md](SECURITY.md).
+MIT licensed. Feedback via GitHub Issues only — pull requests are not accepted. Survey estimates are not suitable for clinical or operational decisions. Full policy: [docs/architecture/IP_POLICY.md](docs/architecture/IP_POLICY.md). Security reports: see [SECURITY.md](SECURITY.md).
 
 <!-- interconnect:v1 -->
 ## Part of the East Africa coordination stack
