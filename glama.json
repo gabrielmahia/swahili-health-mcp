@@ -1,8 +1,8 @@
 {
   "$schema": "https://glama.ai/mcp/schemas/1.0.0/server.json",
   "name": "swahili-health-mcp",
-  "version": "0.1.2",
-  "description": "MCP server for Kenya health data — facilities, maternal health, immunization",
+  "version": "0.2.0",
+  "description": "MCP server for Kenya county health indicators: maternal care, immunization and child stunting from the Kenya DHS 2022",
   "license": "MIT",
   "homepage": "https://gabrielmahia.github.io",
   "author": {
@@ -27,18 +27,16 @@
   ],
   "tools": [
     {
-      "name": "search_health_facilities",
-      "description": "Tafuta vituo vya afya Kenya / Search Kenya health facilities",
-      "annotations": {
-        "readOnlyHint": true,
-        "destructiveHint": false,
-        "idempotentHint": true,
-        "openWorldHint": true
-      }
+      "name": "list_health_indicators",
+      "description": "List every health indicator this server holds (id, label, population it is measured on, whether higher or lower is better) and the survey it comes from.\n\nCall this first. All indicators are percentages from the Kenya DHS 2022 with a value for each of the 47 counties. Returns {survey, source, data_retrieved, indicators:[{id,label,population,group,direction}]}."
+    },
+    {
+      "name": "get_county_health_profile",
+      "description": "Get every held indicator (maternal care, child immunization, child stunting) for one Kenyan county."
     },
     {
       "name": "get_maternal_health_indicators",
-      "description": "Pata takwimu za afya ya uzazi / Get maternal health indicators for a county",
+      "description": "Get a county's maternal health indicators: antenatal visits (4+), antenatal care from a skilled provider, skilled assistance at delivery, health-facility delivery, and mothers with no postnatal checkup.",
       "annotations": {
         "readOnlyHint": true,
         "destructiveHint": false,
@@ -48,13 +46,17 @@
     },
     {
       "name": "get_immunization_coverage",
-      "description": "Pata kiwango cha chanjo / Get immunization coverage for a county and vaccine",
+      "description": "Get the percentage of children aged 12-23 months in a county who received a vaccine.",
       "annotations": {
         "readOnlyHint": true,
         "destructiveHint": false,
         "idempotentHint": true,
         "openWorldHint": true
       }
+    },
+    {
+      "name": "compare_counties",
+      "description": "Rank Kenyan counties on one indicator, to see where need is greatest or coverage is best."
     }
   ],
   "repository": {
