@@ -102,7 +102,7 @@ mcp = FastMCP(
 )
 
 
-@mcp.tool(name="list_health_indicators", annotations=READ_ONLY)
+@mcp.tool(name="list_health_indicators", description="List every health indicator this server holds (id, label, the population it is measured on, and whether higher or lower is better) with the survey they come from. Takes no arguments. Call this first to learn valid indicator ids for compare_counties. Returns the Kenya DHS 2022 source, the retrieval date, the number of counties (47) and the indicator list. Read-only and offline: it reads a bundled snapshot and makes no network call.", annotations=READ_ONLY)
 def list_health_indicators() -> dict:
     """List every health indicator this server holds (id, label, population it is measured on, whether higher or lower is better) and the survey it comes from.
 
@@ -112,7 +112,7 @@ def list_health_indicators() -> dict:
             "indicators": [{"id": i, "label": m["label"], "population": m["population"], "group": m["group"], "direction": "lower is better" if i in LOWER_IS_BETTER else "higher is better"} for i, m in INDICATORS.items()]}
 
 
-@mcp.tool(name="get_county_health_profile", annotations=READ_ONLY)
+@mcp.tool(name="get_county_health_profile", description="Get every indicator this server holds for one Kenyan county: maternal care, child immunization and child stunting. Use when the user asks how a county is doing overall; for one topic use get_maternal_health_indicators or get_immunization_coverage, and to rank counties use compare_counties. Returns each indicator's survey estimate in percent with sample size n, reference period and whether higher or lower is better, plus the survey source, retrieval date and a sampling-error caveat. An unknown county returns an error listing the 47 valid counties; nothing is guessed. Read-only and offline.", annotations=READ_ONLY)
 def get_county_health_profile(county: str) -> dict:
     """Get every held indicator (maternal care, child immunization, child stunting) for one Kenyan county.
 
@@ -123,7 +123,7 @@ def get_county_health_profile(county: str) -> dict:
     return county_health_profile(county)
 
 
-@mcp.tool(name="get_maternal_health_indicators", annotations=READ_ONLY)
+@mcp.tool(name="get_maternal_health_indicators", description="Get a county's maternal health indicators from the Kenya DHS 2022: antenatal visits (4 or more), antenatal care from a skilled provider, skilled assistance at delivery, delivery in a health facility, and mothers with no postnatal checkup. Use when asked about pregnancy, childbirth or postnatal care in a county. Returns survey estimates in percent with sample size n and the DHS-preferred reference period (the two years before the survey), plus source and a sampling-error caveat. An unknown county returns an error listing valid counties. Read-only and offline.", annotations=READ_ONLY)
 def get_maternal_health_indicators(county: str) -> dict:
     """Get a county's maternal health indicators: antenatal visits (4+), antenatal care from a skilled provider, skilled assistance at delivery, health-facility delivery, and mothers with no postnatal checkup.
 
@@ -134,7 +134,7 @@ def get_maternal_health_indicators(county: str) -> dict:
     return maternal_indicators(county)
 
 
-@mcp.tool(name="get_immunization_coverage", annotations=READ_ONLY)
+@mcp.tool(name="get_immunization_coverage", description="Get the percentage of children aged 12-23 months in a county who received a given vaccine, from the Kenya DHS 2022. Use when asked about vaccination coverage; vaccine is one of BCG, DPT3 (also PENTA3), MEASLES, FULL (fully vaccinated with the 8 basic antigens) or NONE (received no vaccinations, where lower is better). Returns one survey estimate with sample size n, source and a sampling-error caveat; DHS gives no reference-period label for these indicators and the answer says so. An unknown county or vaccine returns an error, never a substituted default. Read-only and offline.", annotations=READ_ONLY)
 def get_immunization_coverage(county: str, vaccine: str = "DPT3") -> dict:
     """Get the percentage of children aged 12-23 months in a county who received a vaccine.
 
@@ -146,7 +146,7 @@ def get_immunization_coverage(county: str, vaccine: str = "DPT3") -> dict:
     return immunization_coverage(county, vaccine)
 
 
-@mcp.tool(name="compare_counties", annotations=READ_ONLY)
+@mcp.tool(name="compare_counties", description="Rank Kenyan counties on one indicator to see where need is greatest or coverage is best. Use when the user asks which counties are lowest or highest on something; get a valid indicator id from list_health_indicators, or pass a distinctive part of its label such as stunted. Returns the n counties (1 to 47, default 5) ranked by numeric value, each with percent, sample size n and period, plus direction (for no vaccinations, stunting and no postnatal checkup lower is better, so lowest is the best), source and a sampling-error caveat. County samples are small, so close values are not reliably different. An ambiguous indicator returns an error listing the ids. Read-only and offline.", annotations=READ_ONLY)
 def compare_counties(indicator: str, n: int = 5, order: str = "lowest") -> dict:
     """Rank Kenyan counties on one indicator, to see where need is greatest or coverage is best.
 
