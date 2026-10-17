@@ -44,7 +44,7 @@ Then ask: "Which five counties have the lowest DPT3 coverage?", "Compare antenat
 
 MIT licensed. Feedback via GitHub Issues only — pull requests are not accepted. Survey estimates are not suitable for clinical or operational decisions. Full policy: [docs/architecture/IP_POLICY.md](docs/architecture/IP_POLICY.md). Security reports: see [SECURITY.md](SECURITY.md).
 
-<!-- interconnect:v1 -->
+<!-- interconnect:v2 -->
 ## Part of the East Africa coordination stack
 
 - **Install & run:** `pip install reli-cli && reli list` — the MCP servers on the [official MCP Registry](https://registry.modelcontextprotocol.io) under `io.github.gabrielmahia`
@@ -53,4 +53,4 @@ MIT licensed. Feedback via GitHub Issues only — pull requests are not accepted
 - **Datasets:** [huggingface.co/gmahia](https://huggingface.co/gmahia) · **Docs hub:** [nairobi-stack](https://github.com/gabrielmahia/nairobi-stack)
 
 Model-agnostic by design: closed APIs, open-weight models, and small distilled models are all first-class citizens.
-<!-- /interconnect:v1 -->
+<!-- /interconnect:v2 -->
