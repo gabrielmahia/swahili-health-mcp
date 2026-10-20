@@ -4,18 +4,25 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "swahili-health-mcp"
-version = "0.2.3"
+version = "0.2.4"
 description = "MCP server for Kenya county health indicators: maternal care, immunization and child stunting from the Kenya DHS 2022"
 readme = "README.md"
 license = "MIT"
 keywords = ["kenya", "health", "mcp", "swahili", "dhs", "kdhs", "maternal-health", "immunization", "east-africa"]
 classifiers = [
     "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Programming Language :: Python :: 3.15",
     "Intended Audience :: Developers",
     "Topic :: Scientific/Engineering :: Medical Science Apps.",
 ]
 requires-python = ">=3.10"
 dependencies = ["fastmcp>=4,<5"]
+license-files = ["LICENSE"]
 
 [project.scripts]
 swahili-health-mcp = "swahili_health_mcp.server:main"
