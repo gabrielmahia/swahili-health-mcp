@@ -8,6 +8,8 @@ from __future__ import annotations
 import json
 import re
 from importlib import resources
+from importlib.metadata import PackageNotFoundError
+from importlib.metadata import version as _pkg_version
 
 from fastmcp import FastMCP
 from fastmcp.exceptions import ToolError
@@ -94,11 +96,17 @@ def compare(indicator: str, n: int = 5, order: str = "lowest") -> dict:
 
 
 READ_ONLY = {"readOnlyHint": True, "idempotentHint": True, "openWorldHint": False}
+try:
+    _VERSION = _pkg_version("swahili-health-mcp")
+except PackageNotFoundError:  # a source tree that was never installed
+    _VERSION = "0+unknown"
+
+
 mcp = FastMCP(
     "swahili-health-mcp",
     instructions=("Kenya county-level maternal, child immunization and child nutrition indicators from the DHS Program's Kenya Demographic and Health Survey 2022 "
                   "(real survey estimates, bundled offline). Use list_health_indicators first to see what exists. Values are survey estimates with sampling error, "
-                  "not routine facility data; always state the survey, year and reference period when quoting them."),
+                  "not routine facility data; always state the survey, year and reference period when quoting them."), version=_VERSION,
 )
 
 
