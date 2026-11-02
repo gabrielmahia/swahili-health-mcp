@@ -62,7 +62,7 @@ def build() -> dict:
         for name, rec in rows.items():
             counties.setdefault(name, {})[iid] = rec
     return {"source": "The DHS Program, Kenya Demographic and Health Survey 2022 (KE2022DHS), subnational estimates", "licence_note": "DHS Program open data: cite 'KNBS and ICF. Kenya Demographic and Health Survey 2022' and the DHS Program",
-            "api": API, "survey": SURVEY, "retrieved": dt.datetime.now(dt.timezone.utc).date().isoformat(), "preferred_period_only": True, "indicators": indicators, "counties": dict(sorted(counties.items()))}
+            "api": API, "survey": SURVEY, "retrieved": dt.datetime.now(dt.UTC).date().isoformat(), "preferred_period_only": True, "indicators": indicators, "counties": dict(sorted(counties.items()))}
 
 
 if __name__ == "__main__":
