@@ -6,12 +6,12 @@
     "url": "https://github.com/gabrielmahia/swahili-health-mcp",
     "source": "github"
   },
-  "version": "0.2.6",
+  "version": "0.2.7",
   "packages": [
     {
       "registryType": "pypi",
       "identifier": "swahili-health-mcp",
-      "version": "0.2.6",
+      "version": "0.2.7",
       "transport": {
         "type": "stdio"
       }
