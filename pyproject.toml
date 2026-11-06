@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "swahili-health-mcp"
-version = "0.2.6"
+version = "0.2.7"
 description = "MCP server for Kenya county health indicators: maternal care, immunization and child stunting from the Kenya DHS 2022"
 readme = "README.md"
 license = "MIT"
@@ -27,6 +27,7 @@ license-files = ["LICENSE"]
 swahili-health-mcp = "swahili_health_mcp.server:main"
 
 [project.urls]
+Issues = "https://github.com/gabrielmahia/swahili-health-mcp/issues"
 Homepage = "https://github.com/gabrielmahia/swahili-health-mcp"
 Repository = "https://github.com/gabrielmahia/swahili-health-mcp"
 Documentation = "https://github.com/gabrielmahia/nairobi-stack"
