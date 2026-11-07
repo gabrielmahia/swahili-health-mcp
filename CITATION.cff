@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+type: software
+title: "swahili-health-mcp"
+abstract: "MCP server for Kenya county health indicators: maternal care, immunization and child stunting from the Kenya DHS 2022"
+version: "0.2.7"
+authors:
+  - family-names: "Mahia"
+    given-names: "Gabriel"
+repository-code: "https://github.com/gabrielmahia/swahili-health-mcp"
+license: "MIT"
